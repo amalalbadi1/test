@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\IssuesImport;
 use App\Issue;
 use App\Mail\issuesrequestsubimet;
 use Illuminate\Http\Request;
 use Auth;
 use App\user;
+use Maatwebsite\Excel\Facades\Excel;
 class IssuesController extends Controller
 {
 
@@ -41,6 +43,16 @@ class IssuesController extends Controller
     }
     public function test()
     {
-        return "amalllll";
+        return "test";
+    }
+
+    
+    public function importFromExcel(Request $request)
+    {
+
+    Excel::import(new IssuesImport, $request->excelFile);
+        
+        return "success All good!";
+        
     }
 }
